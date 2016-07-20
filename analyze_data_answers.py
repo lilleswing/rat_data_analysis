@@ -83,7 +83,7 @@ def append_row(dataframe, data_dictionary):
     Returns:
         DataFrame: A new Dataframe with data_dictionary appended
     """
-    return pandas.DataFrame()
+    return dataframe.append(data_dictionary, ignore_index=True)
 
 
 def save_to_file(out_folder, animal_name, dataframe):
@@ -100,7 +100,9 @@ def save_to_file(out_folder, animal_name, dataframe):
     Returns:
         None:
     """
-    return
+    f_name = "%s%s" % (animal_name, ".tsv")
+    f_name = os.path.join(out_folder, f_name)
+    dataframe.to_csv(f_name, sep='\t', index=False)
 
 
 def get_all_data_as_dict(filename):
@@ -115,7 +117,10 @@ def get_all_data_as_dict(filename):
         dict: Dictionary with all data from parse_filename and
               get_data_from_file
     """
-    return {}
+    filename_data = parse_filename(filename)
+    d = get_data_from_file(filename)
+    d.update(filename_data)
+    return d
 
 
 def get_all_files_in_folder(folder):
@@ -127,7 +132,7 @@ def get_all_files_in_folder(folder):
     Returns:
         list<String>: List of filenames in folder
     """
-    return []
+    return [f for f in listdir(folder) if isfile(os.path.join(folder, f))]
 
 
 def main(in_folder, out_folder):
