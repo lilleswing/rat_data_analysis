@@ -9,15 +9,6 @@ import re
 import sys
 
 
-# Folder where reports are stored
-BASE_DIR = "/Users/Glennon/Documents/erins_data"
-
-# Attempt to make folder if not exist
-try:
-  os.mkdir(BASE_DIR)
-except:
-  pass
-
 
 def get_data_from_file(filename):
     """
@@ -93,7 +84,7 @@ def append_row(dataframe, data_dictionary):
     Returns:
         DataFrame: A new Dataframe with data_dictionary appended
     """
-    updated = pandas.concat(dataframe, data_dictionary)
+    updated = dataframe.append(data_dictionary)
     print updated
     return updated
 
@@ -113,7 +104,8 @@ def save_to_file(out_folder, animal_name, dataframe):
         None:
     """
     file_name = "%s.csv" % (animal_name)
-    DataFrame.to_csv("/Users/Glennon/Documents/erins_data", file_name)
+    file_name = os.path.join(out_folder, file_name)
+    dataframe.to_csv("/Users/Glennon/Documents/erins_data", file_name)
     return
 
 
@@ -134,7 +126,7 @@ def get_all_data_as_dict(filename):
     data = get_data_from_file(filename)
     data_dictionary = filedata.copy()
     data_dictionary.update(data)
-    return {data_dictionary}
+    return data_dictionary
 
 
 def get_all_files_in_folder(folder):
@@ -147,7 +139,7 @@ def get_all_files_in_folder(folder):
         list<String>: List of filenames in folder
     """
     folder = os.listdir("/Users/Glennon/Documents/erins_reports_test")
-    return [folder]
+    return folder
 
 
 def main(in_folder, out_folder):
@@ -169,4 +161,14 @@ if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("python analyze.py <csv_input_folder> <output_folder>")
         sys.exit(1)
+
+        # Folder where reports are stored
+        #BASE_DIR = "/Users/Glennon/Documents/erins_data"
+
+        # Attempt to make folder if not exist
+        #try:
+         # os.mkdir(BASE_DIR)
+        #except:
+        #  pass
+
     main(sys.argv[1], sys.argv[2])
