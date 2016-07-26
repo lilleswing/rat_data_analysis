@@ -84,9 +84,7 @@ def append_row(dataframe, data_dictionary):
     Returns:
         DataFrame: A new Dataframe with data_dictionary appended
     """
-    print(data_dictionary)
     updated = dataframe.append(data_dictionary, ignore_index=True)
-    print updated
     return updated
 
 
