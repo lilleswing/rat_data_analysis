@@ -1,13 +1,10 @@
 from __future__ import division
-from os import listdir
-from os.path import isfile
 from scipy.stats import norm
 import datetime
 import os
 import pandas as pandas
 import re
 import sys
-
 
 
 def get_data_from_file(filename):
@@ -108,7 +105,6 @@ def save_to_file(out_folder, animal_name, dataframe):
     return
 
 
-
 def get_all_data_as_dict(filename):
     """
     TODO(ERIN)
@@ -138,6 +134,9 @@ def get_all_files_in_folder(folder):
         list<String>: List of filenames in folder
     """
     folder = os.listdir(folder)
+    for f in folder:
+        if not f.endswith(".csv"):
+            folder.remove(f)
     return folder
 
 
@@ -162,12 +161,12 @@ if __name__ == "__main__":
         sys.exit(1)
 
         # Folder where reports are stored
-        #BASE_DIR = "/Users/Glennon/Documents/erins_data"
+        # BASE_DIR = "/Users/Glennon/Documents/erins_data"
 
         # Attempt to make folder if not exist
-        #try:
-         # os.mkdir(BASE_DIR)
-        #except:
+        # try:
+        # os.mkdir(BASE_DIR)
+        # except:
         #  pass
 
     main(sys.argv[1], sys.argv[2])
