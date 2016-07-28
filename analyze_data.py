@@ -84,8 +84,7 @@ def append_row(dataframe, data_dictionary):
     Returns:
         DataFrame: A new Dataframe with data_dictionary appended
     """
-    updated = dataframe.append(data_dictionary)
-    print updated
+    updated = dataframe.append(data_dictionary, ignore_index=True)
     return updated
 
 
@@ -105,7 +104,7 @@ def save_to_file(out_folder, animal_name, dataframe):
     """
     file_name = "%s.csv" % (animal_name)
     file_name = os.path.join(out_folder, file_name)
-    dataframe.to_csv("/Users/Glennon/Documents/erins_data", file_name)
+    dataframe.to_csv(file_name, sep='\t', index=False)
     return
 
 
@@ -138,7 +137,7 @@ def get_all_files_in_folder(folder):
     Returns:
         list<String>: List of filenames in folder
     """
-    folder = os.listdir("/Users/Glennon/Documents/erins_reports_test")
+    folder = os.listdir(folder)
     return folder
 
 
