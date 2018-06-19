@@ -1,8 +1,8 @@
 function FP_input_analysis()%(handles)
 
-%load('KRSY20180327rec2-180327-111655.mat')
+load('KRSY20180327rec2-180327-111655.mat')
 
-load('TYRN20180611rec1-180611-170409.mat')
+%load('TYRN20180611rec1-180611-170409.mat')
 
 laser = input(:);
 
