@@ -3,6 +3,15 @@
 
 load('TYRN20180612rec2-180612-165444.mat')
 
+% bandpass to 5 Hz via rec from Dayu
+
+FL = 1017.25;                       %%Sampling rate
+[b, a] = butter(4, 5/FL, 'low');
+Lfilter = filtfilt(b, a, double(Ca));
+figure; plot(Lfilter)
+
+
+
 trigger = input(:);
 
 %%Fnd all trigger points, high and low
@@ -47,6 +56,3 @@ num_points = 925*ones(1,length(trigger_pks_locs));
  figure; plot(input); hold on; plot(trigger_pks_locs',num_points,'sr', 'MarkerSize',5,'MarkerFaceColor', 'b', 'MarkerEdgeColor', 'none');
  hold on; plot(trigger_high_pks_locs',num_high_points,'sr', 'MarkerSize',5,'MarkerFaceColor', 'r', 'MarkerEdgeColor', 'none');
 
-
-
-test = 0;
